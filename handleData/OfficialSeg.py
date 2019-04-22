@@ -18,7 +18,7 @@ import jieba.analyse
 # jieba.suggest_freq("急则治标", True)
 # jieba.suggest_freq("缓则治本", True)
 # ----------------------------------------
-loadDictFileName = "F:\BigStudyGraduation\MyFinishSchool\pythonFile\suggestFreqTCM.txt"    # 自定义词典的路径
+loadDictFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\rules\\suggestFreqTCM.txt"    # 自定义词典的路径
 jieba.load_userdict(loadDictFileName)      # 根据 file_name 路径进行自我学习，更好的进行分词
 
 # jieba.load_userdict('userdict.txt')
@@ -31,7 +31,7 @@ jieba.load_userdict(loadDictFileName)      # 根据 file_name 路径进行自我
 # ------------------停用词 - 自定义语料库 --------------------------------------
 # stopwords = {}.fromkeys(["术语","的","是","、","。","，","NO"])
 # ------------------停用词 - 自定义语料库 --------------------------------------
-setStopWordsFileName = "F:\\BigStudyGraduation\\MyFinishSchool\\pythonFile\\stopWordsTCM.txt"   # 停用词路径 - setStopWordsFileName
+setStopWordsFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\rules\\stopWordsTCM.txt"   # 停用词路径 - setStopWordsFileName
 # stopwordslist 此方法，用来读取停用词
 def stopwordslist(filepath):
     stopwords = [line.strip() for line in open(filepath, 'r', encoding='utf-8').readlines()]
@@ -50,9 +50,9 @@ def seg_sentence(sentence):
     return outstr
 
 # 文件的读取地址
-readFileName = "F:\Trainee\ideaIU-2018.2\TraditionalChineseMedicine_PDF_Check\src\\txt\\test.txt"
+readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_in\\HeterozygousTherapy.txt"
 # 文件的写地址
-writeFileName = "F:\Trainee\ideaIU-2018.2\TraditionalChineseMedicine_PDF_Check\src\\txt\\testResult00.txt"
+writeFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out\\HeterozygousTherapy.txt"
 
 # 开始进行文本的分析操作
 # 流程 --> 分词 - 过滤停用词
