@@ -60,9 +60,6 @@ inputs = open(readFileName, 'r', encoding='utf-8')
 outputs = open(writeFileName, 'w', encoding='utf-8')
 for line in inputs:     # line 变量，才是从读取文件的每一行的原始数据
     line_seg = seg_sentence(line)  # line_seg 结果是经过 seg_sentence() 方法处理的分词结果，即.../.../..，这样的结果
-
-
-
     outputs.write(line_seg + '\n')
 outputs.close()
 inputs.close()

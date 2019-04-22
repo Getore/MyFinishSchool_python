@@ -7,13 +7,13 @@ import jieba.analyse
 
 # --------------------------------步骤一  学习专有名词------------------------------------------
 # 用来帮助 jieba 更好的进行名词等词语的分词
-loadDictFileName = "F:\\Trainee\\pycharm-professional\\workspace\\helloMx\handleData\\rules\\suggestFreqTCM.txt"    # 自定义词典的路径
+loadDictFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\rules\\suggestFreqTCM.txt"    # 自定义词典的路径
 jieba.load_userdict(loadDictFileName)      # 根据 file_name 路径进行自我学习，更好的进行分词
 
 
 # --------------------------------步骤二  过滤停用词------------------------------------------
 # 创建停用词，用来删除文本中的停用词
-setStopWordsFileName = "F:\\Trainee\\pycharm-professional\\workspace\\helloMx\\handleData\\rules\\stopWordsTCM.txt"   # 停用词路径 - setStopWordsFileName
+setStopWordsFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\rules\\stopWordsTCM.txt"   # 停用词路径 - setStopWordsFileName
 # stopwordslist 此方法，用来读取停用词
 def stopwordslist(filepath):
     stopwords = [line.strip() for line in open(filepath, 'r', encoding='utf-8').readlines()]
@@ -22,7 +22,7 @@ def stopwordslist(filepath):
 
 # ---------------------------------步骤三  同义词替换-----------------------------------------
 # 读取同义词的词典
-fileName = "F:\\Trainee\\pycharm-professional\\workspace\\helloMx\\handleData\\rules\\synonymTCM.txt"
+fileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\rules\\synonymTCM.txt"
 def combinedfile(filepath):
     combine_dict = {}
     for line in open(filepath, "r", encoding="utf-8"):
@@ -65,9 +65,9 @@ def seg_sentence(sentence):
     return outstr
 
 # 文件的读取地址
-readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\helloMx\\handleData\\words_in\\HeterozygousTherapy.txt"
+readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\words_in\\HeterozygousTherapy.txt"
 # 文件的写地址
-writeFileName = "F:\\Trainee\\pycharm-professional\\workspace\\helloMx\\handleData\\words_out\\HeterozygousTherapyResult.txt"
+writeFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\words_out\\HeterozygousTherapy.txt"
 
 # 开始进行文本的分析操作
 # 流程 --> 学习专有名词 - 过滤停用词 - 同义词替换 - 分词
