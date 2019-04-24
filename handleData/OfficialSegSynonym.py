@@ -47,7 +47,7 @@ def final_sentence_word(word_to_check):
             word = combine_dict[word]
             final_sentence += word + "/"    # 给替换词的后面加 “/”
         else:
-            final_sentence += word + "|"    # 按照原来的风格，展示分词的效果
+            final_sentence += word + "/"    # 按照原来的风格，展示分词的效果
 
     return final_sentence
 
@@ -65,9 +65,9 @@ def seg_sentence(sentence):
     return outstr
 
 # 文件的读取地址
-readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\words_in\\HeterozygousTherapy.txt"
+readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_in\\HeterozygousTherapy.txt"
 # 文件的写地址
-writeFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\words_out\\HeterozygousTherapy.txt"
+writeFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out\\HeterozygousTherapy.txt"
 
 # 开始进行文本的分析操作
 # 流程 --> 学习专有名词 - 过滤停用词 - 同义词替换 - 分词
