@@ -1,3 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Date    : 2019-04-16 16:09:41
+# @Author  : 沈力
+# @Version : v1.0
 import jieba
 import jieba.analyse
 
