@@ -5,7 +5,7 @@
 # @Version : v1.0
 import jieba
 import jieba.analyse
-
+from string import digits
 # 功能：本页面，按方法来实现较为完整的治则分词
 
 # --------------------------------步骤一  学习专有名词------------------------------------------
@@ -81,6 +81,15 @@ for line in inputs:     # line 变量，才是从读取文件的每一行的原�
     line = line.replace('/', '')    # 这里是先将本句文本中的/，全部替换掉
     line_seg = seg_sentence(line)  # line_seg 结果是经过 seg_sentence() 方法处理的分词结果，即.../.../..，这样的结果
     line_seg_latest = final_sentence_word(line_seg)
+    line_seg_latest = line_seg_latest.replace('/', '')  # 此处是为了处理最后的文本，将所有的/删除
+    line_seg_latest = line_seg_latest.replace('.', '')  # 此处是为了处理最后的文本，将所有的.删除
+    # 请注意，此处可能不合适，因为 治则里有小治则
+    # # 此处是为了处理文本的所有数字 导入: from string import digits
+    # remove_digits = str.maketrans('', '', digits)
+    # line_seg_latest = line_seg_latest.translate(remove_digits)
+    line_seg_latest = line_seg_latest.replace('001', '')
     outputs.write(line_seg_latest + '\n')
+
 outputs.close()
 inputs.close()
+
