@@ -1,16 +1,12 @@
-# Segmentation  n 分割；划分     Synonym n 同义词
-#
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Date    : 2019-04-16 16:09:41
+# @Date    : 2019-04-27 16:09:41
 # @Author  : 沈力
 # @Version : v1.0
 import jieba
 import jieba.analyse
 
-# 本页面，按方法来实现较为完整的完成分词、使用停用词、学习专有名词的功能
-# 优点：代码思路清晰
-
+# 功能：本页面，按方法来实现较为完整的治则分词
 
 # --------------------------------步骤一  学习专有名词------------------------------------------
 # 用来帮助 jieba 更好的进行名词等词语的分词
@@ -72,9 +68,9 @@ def seg_sentence(sentence):
     return outstr
 
 # 文件的读取地址
-readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_in\\HeterozygousTherapy.txt"
+readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out\\Treatment.txt"
 # 文件的写地址
-writeFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out\\HeterozygousTherapy.txt"
+writeFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out_mysql\\Treatment.txt"
 
 # 开始进行文本的分析操作
 # 流程 --> 学习专有名词 - 过滤停用词 - 同义词替换 - 分词
