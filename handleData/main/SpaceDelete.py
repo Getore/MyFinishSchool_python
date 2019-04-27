@@ -9,14 +9,16 @@ import re
 # 文件的读取地址
 readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_in\\Therapy.txt"
 # 文件的写地址
-writeFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out\\Therapy.txt"
+TREATMENTWRITE = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out\\Treatment.txt"
+THERAPYWRITE = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out\\Therapy.txt"
 
-# 开始进行文本的分析操作
-# 流程 --> 学习专有名词 - 过滤停用词 - 同义词替换 - 分词
+# 设置文件信息
 inputs = open(readFileName, 'r', encoding='utf-8')
-outputs = open(writeFileName, 'w', encoding='utf-8')
+treatmentOutput = open(TREATMENTWRITE, 'w', encoding='utf-8')
+therapyOutput = open(THERAPYWRITE, 'w', encoding='utf-8')
 
 flag = 0    # 用来对文本的存储做个开关设置
+mark = 0    # 用来对输出的哪个文件做一个开关设置
 for line in inputs:     # line 变量，才是从读取文件的每一行的原始数据
     if line == '\n' :   # 如果此行只有换行，那么文本将不会输入到输出文件
         continue
@@ -24,8 +26,14 @@ for line in inputs:     # line 变量，才是从读取文件的每一行的原�
         flag = 1
     if line == '附录A\n' :
         flag = 0
-    if flag == 1 :
-        outputs.write(re.sub('\n+', '\n', line))    # 使用正则表达式，再一次去除每一行的换行
 
-outputs.close()
+    if line == '解表法\n' :    # 从 解表法 开始，将文本信息存储在法治文件里
+        mark = 1
+
+    if all(( flag == 1, mark == 0 )) :
+        treatmentOutput.write(re.sub('\n+', '\n', line))    # 使用正则表达式，再一次去除每一行的换行
+    elif all(( flag == 1, mark == 1 )) :
+        therapyOutput.write(re.sub('\n+', '\n', line))
+
+treatmentOutput.close()
 inputs.close()
