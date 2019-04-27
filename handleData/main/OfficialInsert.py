@@ -5,6 +5,8 @@
 # @Version : v1.0
 import os,glob
 
+# 功能：本页面主要用来将得到的文本存储到数据库
+
 import MySQLdb
 
 # 连接数据库         连接地址        账号      密码             数据库             数据库编码
