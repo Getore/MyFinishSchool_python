@@ -26,11 +26,9 @@ db = MySQLdb.connect("localhost", "root", "123456", "tcm_clinicaltttpart_pure", 
 cursor = db.cursor()
 
 
+# TODO 根据数字的大小和同等长度判断标识
+# def  identify_
 
-
-
-
-# --------------------------首先处理小法情况-----------------------------
 # 文件的读取地址
 readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out_mysqlI\\Treatment.txt"
 
@@ -62,7 +60,7 @@ for line in inputs:     # line 变量，才是从读取文件的每一行的原�
         title = arrList[1]
         flag = 0                # 将title保存完就赶紧关闭，因为只有一个专有名词
 
-        i = 2
+        i = 2                   # 将剩下的作为content进行存储
         if i >= length:
             while i < length:
                 content += arrList[i]
@@ -72,6 +70,7 @@ for line in inputs:     # line 变量，才是从读取文件的每一行的原�
             content += arrList[i]
             i += 1
 
+content = content.replace('\n','')      # 去除content的换行，使其变成一句，存入数据库
 print(title)
 print(content)
     # print(num)
