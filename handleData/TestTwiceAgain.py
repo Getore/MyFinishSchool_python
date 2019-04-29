@@ -26,8 +26,22 @@ db = MySQLdb.connect("localhost", "root", "123456", "tcm_clinicaltttpart_pure", 
 cursor = db.cursor()
 
 
-# TODO 根据数字的大小和同等长度判断标识
-# def  identify_
+# TODO 根据数字同等长度和的大小，判断：是属于小法还是小小法
+def  identify_num(old_num, new_num):
+    oldLength = len(old_num)
+    newLength = len(new_num)
+
+    oldTemp = old_num[0 : oldLength]        # 看相同位的数字是否相同
+    newTemp = new_num[0 : oldLength]        # 所以两个数字的长度都是看 oldLength
+
+    # 规定标志
+    #  0 小法
+    #  1 小小法
+    # -1 错误信息（什么都不是）    暂且不考虑错误数据，“不是小小法的全部都是小法”的规则 √
+    if oldTemp == newTemp:
+        return 1    # 长度相同和数值相同，那么这是小小法
+
+    return 0
 
 # 文件的读取地址
 readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out_mysqlI\\Treatment.txt"
@@ -47,14 +61,28 @@ content = ''
 
 flag = 0    # 用来判断第一个数组，是否是数字，是就打开（1）开关存入 title ，不是则关闭（0），从第0个数组开始起作为 content 内容
 arrList = ''
+num = '0'
+oldNum = 0  # 用来存上一个标识
+newNum = 0  # 用来存现在的这个标识
+
 inputs = open(readFileName, 'r', encoding='utf-8-sig')  # UTF-8以字节为编码单元，它的字节顺序在所有系统中都是一様的，没有字节序的问题，也因此它实际上并不需要BOM(“ByteOrder Mark”)。但是UTF-8 with BOM即utf-8-sig需要提供BOM。
 for line in inputs:     # line 变量，才是从读取文件的每一行的原始数据
     arrList = re.split('/', line)
     length = len(arrList)   #获取数组的长度
 
+    if num.isdigit():
+        oldNum = num
+
     num = arrList[0][2:4]       # 判断第0个数组的第[2:4]的字符是否是数字
     if num.isdigit() :          # 字符是否是数字
         flag = 1
+        content = ''            # 将上一条的内容置空
+        newNum = num            # 第一次读的永远是新的一条数据的数字(标识)
+        # print(oldNum)
+        # print(newNum)
+        # print('-----------')
+        print(identify_num(oldNum, newNum))    # 这里用根据同等数字的大小与数量判断是小法还是小小法，并编好字段parentId
+
 
     if flag == 1:               # 如果是数字，那么其后，肯定是专有名词，也就是title
         title = arrList[1]
@@ -70,9 +98,13 @@ for line in inputs:     # line 变量，才是从读取文件的每一行的原�
             content += arrList[i]
             i += 1
 
+
 content = content.replace('\n','')      # 去除content的换行，使其变成一句，存入数据库
+# print(oldNum)
+# print(newNum)
 print(title)
 print(content)
+
     # print(num)
     # print(arrList[0][0:1])
     # print(arrList[0][0:2])
