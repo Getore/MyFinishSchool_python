@@ -26,7 +26,7 @@ db = MySQLdb.connect("localhost", "root", "123456", "tcm_clinicaltttpart_pure", 
 cursor = db.cursor()
 
 
-# TODO 根据数字同等长度和的大小，判断：是属于小法还是小小法
+# 根据数字同等长度和的大小，判断：是属于小法还是小小法
 def  identify_num(old_num, new_num):
     oldLength = len(old_num)
     newLength = len(new_num)

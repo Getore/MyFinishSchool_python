@@ -80,12 +80,17 @@ inputs = open(readFileName, 'r', encoding='utf-8')
 outputs = open(writeFileName, 'w', encoding='utf-8')
 
 for line in inputs:     # line 变量，才是从读取文件的每一行的原始数据
-    line = line.replace('/', '')    # 这里是先将本句文本中的/，全部替换掉
+    line = line.replace('/', '')    # 这里是先将本句文本中的/，全部替换掉，那么line_seg得到的是一行纯文本( 不带/的 )
     line_seg = seg_sentence(line)  # line_seg 结果是经过 seg_sentence() 方法处理的分词结果，即.../.../..，这样的结果
 
     if line == '\n' :   # 如果此行只有换行，那么文本将不会输入到输出文件
         continue
 
+    if line == '治则\n' :
+        continue
+
+    if line_seg == '/\n' :
+        continue
     line_seg_latest = final_sentence_word(line_seg)
     # line_seg_latest = line_seg_latest.replace('/', '')  # 此处是为了处理最后的文本，将所有的/删除
     # line_seg_latest = line_seg_latest.replace('.', '')  # 此处是为了处理最后的文本，将所有的.删除
@@ -97,9 +102,6 @@ for line in inputs:     # line 变量，才是从读取文件的每一行的原�
 
     line_seg_latest = line_seg_latest.replace('001', '')    # 根据治则的特殊字符'001'处理
     line_seg_latest = line_seg_latest.replace('//','/')     # 将分词后的 // 变成 /，便于进行数据库存储处理
-
-    # if line_seg_latest == '/\n':      # 想用来删除单行 /
-    #     continue
 
     outputs.write(line_seg_latest + '\n')
 
