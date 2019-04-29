@@ -41,7 +41,37 @@ def  identify_num(old_num, new_num):
     if oldTemp == newTemp:
         return 1    # 长度相同和数值相同，那么这是小小法
 
-    return 0
+    return 0    # 否则都是小法
+
+# TODO 用来根据论文中的设定，解决parentIdI、titleUnit、parentIdII的编码内容
+def idUnit(flag, COUNTID0, COUNTID1, suffix0, suffix1):  # flag是identify_num的判断结果，length
+    if flag == 0:   # 如果是小法
+
+        COUNTID0 = str(COUNTID0)
+        length = len(COUNTID0)
+        COUNTID0 = int(COUNTID0)
+
+        if length <= 1 : # 如果 length == 1，那么是 “01”单个数字的形式
+            suffix0 = '0' + str(COUNTID0)
+        else:
+            suffix0 = str(COUNTID0)
+
+        result = 'DE05.01.901.' + suffix0       # 901代表 治则
+
+    if flag == 1:       # 如果是小小法，那么要根据所属的小法填充字段
+
+        COUNTID1 = str(COUNTID1)
+        length = len(COUNTID1)
+        COUNTID1 = int(COUNTID1)
+
+        if length <= 1 : # 如果 length == 1，那么是 “01”单个数字的形式
+            suffix1 = '0' + str(COUNTID1)
+        else:
+            suffix1 = str(COUNTID1)
+
+        result = 'DE05.01.901.' + suffix0 + '.' + suffix1       # 901代表 治则
+
+    return result
 
 # 文件的读取地址
 readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out_mysqlI\\Treatment.txt"
@@ -65,6 +95,11 @@ num = '0'
 oldNum = 0  # 用来存上一个标识
 newNum = 0  # 用来存现在的这个标识
 
+COUNTID0 = 1    # 小法计数
+COUNTID1 = 1    # 小小法计数
+suffix0 = '01'  # 小法的后缀
+suffix1 = '01'  # 小小法的后缀
+
 inputs = open(readFileName, 'r', encoding='utf-8-sig')  # UTF-8以字节为编码单元，它的字节顺序在所有系统中都是一様的，没有字节序的问题，也因此它实际上并不需要BOM(“ByteOrder Mark”)。但是UTF-8 with BOM即utf-8-sig需要提供BOM。
 for line in inputs:     # line 变量，才是从读取文件的每一行的原始数据
     arrList = re.split('/', line)
@@ -81,7 +116,16 @@ for line in inputs:     # line 变量，才是从读取文件的每一行的原�
         # print(oldNum)
         # print(newNum)
         # print('-----------')
-        print(identify_num(oldNum, newNum))    # 这里用根据同等数字的大小与数量判断是小法还是小小法，并编好字段parentId
+        # print(identify_num(oldNum, newNum))    # 这里用根据同等数字的大小与数量判断是小法还是小小法，并编好字段parentId
+        if identify_num(oldNum, newNum) == 0:   # 0是小法
+            parentIdI = 0
+            titleUnit = idUnit(identify_num(oldNum, newNum), COUNTID0, COUNTID1, suffix0, suffix1)
+            COUNTID0 += 1
+
+        if identify_num(oldNum, newNum) == 1:   # 1是小小法
+            parentIdI = titleUnit
+            titleUnit = idUnit(identify_num(oldNum, newNum), COUNTID0, COUNTID1, suffix0, suffix1)
+            COUNTID1 += 1
 
 
     if flag == 1:               # 如果是数字，那么其后，肯定是专有名词，也就是title
@@ -99,11 +143,14 @@ for line in inputs:     # line 变量，才是从读取文件的每一行的原�
             i += 1
 
 
-content = content.replace('\n','')      # 去除content的换行，使其变成一句，存入数据库
 # print(oldNum)
 # print(newNum)
+content = content.replace('\n', '')  # 去除content的换行，使其变成一句，存入数据库
+print('parentIdI:' + str(parentIdI))
 print(title)
+print('titleUnit:' + titleUnit)
 print(content)
+
 
     # print(num)
     # print(arrList[0][0:1])
