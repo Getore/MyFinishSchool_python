@@ -7,7 +7,7 @@
 # 1.是数字 - 是哪种数字
 # 2.在数字后的第一个，是专有名词，直接进行数据库存储
 # 3.剩下的字符串全部相加，变成一个字符串，直到遇到数字
-#
+# TODO 可删除此文件
 # treatment_project
 # parentIdI  title   titleUnit  orderNum   createTime    createUser     remark
 #
@@ -143,13 +143,16 @@ for line in inputs:     # line 变量，才是从读取文件的每一行的原�
             i += 1
 
 
+    content = content.replace('\n', '')  # 去除content的换行，使其变成一句，存入数据库
+    print('parentIdI:' + str(parentIdI))
+    print(title)
+    print('titleUnit:' + titleUnit)
+    print(content)
+
+
 # print(oldNum)
 # print(newNum)
-content = content.replace('\n', '')  # 去除content的换行，使其变成一句，存入数据库
-print('parentIdI:' + str(parentIdI))
-print(title)
-print('titleUnit:' + titleUnit)
-print(content)
+
 
 
     # print(num)

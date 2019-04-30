@@ -16,7 +16,7 @@ cursor = db.cursor()
 
 # --------------------------首先处理小法情况-----------------------------
 # 文件的读取地址
-readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_in\\treatment.txt"
+readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out_mysqlI\\Treatment.txt"
 
 
 inputs = open(readFileName, 'r', encoding='utf-8-sig')  # UTF-8以字节为编码单元，它的字节顺序在所有系统中都是一様的，没有字节序的问题，也因此它实际上并不需要BOM(“ByteOrder Mark”)。但是UTF-8 with BOM即utf-8-sig需要提供BOM。
@@ -37,7 +37,7 @@ inputs.close()
 print(parentId)
 # title = "急则治标"
 print(title)
-nameUnitI = "DE05.01.901.01.00"     # 小法
+nameUnitI = "DE05.01.901.01"     # 小法
 nameUnitII = "DE05.01.901.01.01"    # 小小法   如果有小小法，那么注释所对应的 parentId 是 nameUnitII
 orderNum = 1
 createUser = 1
@@ -45,6 +45,8 @@ createUser = 1
 # content = "与缓则治本相对而言。在大出血、暴泻、剧痛等标症甚急的情况下．应及时救治标病，如止血、止泻、止痛等，然后治其本病的治疗原则。"
 print(content)
 orderNumContent = 1
+
+
 
 # SQL 插入语句
 sqlTreatmentProject = """INSERT INTO treatment_project(parent_id, 
