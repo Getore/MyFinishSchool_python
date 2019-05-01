@@ -8,10 +8,10 @@
 import re
 
 # 文件的读取地址
-readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_in\\Therapy.txt"
+readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_in\\TreatmentTherapy.txt"
 # 文件的写地址
 TREATMENTWRITE = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out\\Treatment.txt"
-THERAPYWRITE = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out\\Therapy.txt"
+THERAPYWRITE = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out\\TreatmentTherapy.txt"
 
 # 设置文件信息
 inputs = open(readFileName, 'r', encoding='utf-8')

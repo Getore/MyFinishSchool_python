@@ -50,9 +50,9 @@ def seg_sentence(sentence):
     return outstr
 
 # 文件的读取地址
-readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_in\\HeterozygousTherapy.txt"
+readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_in\\TreatmentTherapy.txt"
 # 文件的写地址
-writeFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out\\HeterozygousTherapy.txt"
+writeFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out\\TreatmentTherapy.txt"
 
 # 开始进行文本的分析操作
 # 流程 --> 分词 - 过滤停用词
