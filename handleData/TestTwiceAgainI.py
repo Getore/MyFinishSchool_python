@@ -25,49 +25,59 @@ db = MySQLdb.connect("localhost", "root", "123456", "tcm_clinicaltttpart_pure", 
 # 使用cursor()方法获取操作游标
 cursor = db.cursor()
 
-
 # 规定数据库各列的初始值
+countI = 1      # 用来作为 小法 的计数
+countII = 1     # 用来作为 小小法 的计数
 parentIdI = 0
 title = '治则'
-titleUnit = 'DE05.01.901.00.00'
+titleUnit = 'DE05.01.901.01'    # DE05.01.901.01小法；DE05.01.901.01.01小小法
+
+
+parentIdII = ''     # 以小小法 titleUnit 优先
+content = ''
+
 orderNum = 1
 createTime = 'now()'
 createUser = 1
 remark = ''
 
-parentIdII = ''
-content = ''
-# 规定数据库各列的初始值
+# 用来判断当前的 cou 是否是一位，一位则输出‘01’的形式，两位则无需加‘0’的前缀
+def count_name(cou):
+    cou = str(cou)
+    lengthCou = len(cou)
+    if lengthCou == 1:
+        cou = '0' + cou
 
-# 根据数字同等长度和的大小，判断：是属于小法还是小小法
-def  identify_num(old_num, new_num):
-    oldLength = len(old_num)
-    newLength = len(new_num)
+    return cou
 
-    oldTemp = old_num[0 : oldLength]        # 看相同位的数字是否相同
-    newTemp = new_num[0 : oldLength]        # 所以两个数字的长度都是看 oldLength
-
-    # 规定标志
-    #  0 小法
-    #  1 小小法
-    # -1 错误信息（什么都不是）    暂且不考虑错误数据，“不是小小法的全部都是小法”的规则 √
-    if oldTemp == newTemp:
-        return 1    # 长度相同和数值相同，那么这是小小法
-
-    return 0    # 否则都是小法
+# 文件的读取地址
+readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\words_outII\\Treatment.txt"
 
 num = '0'
 oldNum = 0  # 用来存上一个标识
 newNum = 0  # 用来存现在的这个标识
 
-
-# 文件的读取地址
-readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\MyFinishSchool_python\\handleData\\words_out_mysqlI\\Treatment.txt"
-
 inputs = open(readFileName, 'r', encoding='utf-8-sig')  # UTF-8以字节为编码单元，它的字节顺序在所有系统中都是一様的，没有字节序的问题，也因此它实际上并不需要BOM(“ByteOrder Mark”)。但是UTF-8 with BOM即utf-8-sig需要提供BOM。
-for line in inputs:     # line 变量，才是从读取文件的每一行的原始数据
+for line in inputs:
+    if line == '\n':    # 清除没有内容的一行，如第一行
+        continue
+
     arrList = re.split('/',line)
     length = len(arrList)  # 获取数组的长度
+
+    oldNum = newNum
+    newNum = arrList[0]
+    if oldNum == newNum:
+        print('小小法')
+        parentIdI = 'DE05.01.901.' + count_name(countI) + '.' + count_name(countII)
+        countII += 1
+        print(parentIdI)
+    else:
+        print('小法')
+        parentIdI = 'DE05.01.901.' + count_name(countI)
+        countI += 1
+        countII = 1
+        print(parentIdI)
 
     i = 0
     while i < length:
@@ -75,8 +85,8 @@ for line in inputs:     # line 变量，才是从读取文件的每一行的原�
 
         if all((num.isdigit(), content != '')) :
             i += 1
-            print(title)
-            print(content)
+            # print(title)
+            # print(content)
             content = ''
             continue
         if arrList[i-1][2:4].isdigit():     # TODO 运行一遍，就会发现问题，在文本最后方加 字符串 3.99 就正常了，请解决一下√
