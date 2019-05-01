@@ -32,7 +32,6 @@ parentIdI = 0
 title = '治则'
 titleUnit = 'DE05.01.901.01'    # DE05.01.901.01小法；DE05.01.901.01.01小小法
 
-
 parentIdII = ''     # 以小小法 titleUnit 优先
 content = ''
 
@@ -68,51 +67,67 @@ for line in inputs:
     oldNum = newNum
     newNum = arrList[0]
     if oldNum == newNum:
-        print('小小法')
-        parentIdI = 'DE05.01.901.' + count_name(countI) + '.' + count_name(countII)
+        # print('小小法')
+        parentIdI = 'DE05.01.901.' + count_name(countI-1)
+        titleUnit = 'DE05.01.901.' + count_name(countI-1) + '.' + count_name(countII)
         countII += 1
-        print(parentIdI)
+        title = arrList[2]
     else:
-        print('小法')
-        parentIdI = 'DE05.01.901.' + count_name(countI)
+        # print('小法')
+        parentIdI = 0
+        titleUnit = 'DE05.01.901.' + count_name(countI)
         countI += 1
-        countII = 1
-        print(parentIdI)
+        countII = 1     # 将小小法的计数归 1
+        title = arrList[1]
 
-    i = 0
-    while i < length:
-        num = arrList[i][2:4]  # 取每个数组的第[2:4]的字符，是否是数字
+    # print(parentIdI)
+    # print(title)
+    # print(titleUnit)
+    orderNum += 1   # 排序值自增
+    # SQL 插入语句
+    sqlTreatmentProject = """INSERT INTO treatproject(parent_id,
+             title, title_unit, order_num, create_time, create_user)
+             VALUES ('%s', '%s', '%s', '%d', now(), '%d')""" % (parentIdI, title, titleUnit, orderNum, createUser)
+    #
+    # sqlTreatmentContent = """INSERT INTO treatment_content(parent_id,
+    #          content, order_num, create_time, create_user)
+    #          VALUES ('%s', '%s', '%d', now(), '%d')""" % (nameUnitII, content, orderNumContent, createUser)
 
-        if all((num.isdigit(), content != '')) :
-            i += 1
-            # print(title)
-            # print(content)
-            content = ''
-            continue
-        if arrList[i-1][2:4].isdigit():     # TODO 运行一遍，就会发现问题，在文本最后方加 字符串 3.99 就正常了，请解决一下√
-            title = arrList[i]
-        else:
-            content += arrList[i]
+    try:
+        # 执行sql语句
+        cursor.execute(sqlTreatmentProject)
+        # cursor.execute(sqlTreatmentContent)
+        # print(sql)
+        # 提交到数据库执行
+        db.commit()
+        # print("com")
+    except:
+        # Rollback in case there is any error
+        db.rollback()
+        print("error")
 
-        i += 1
+    # i = 0
+    # while i < length:
+    #     num = arrList[i][2:4]  # 取每个数组的第[2:4]的字符，是否是数字
+    #
+    #     if all((num.isdigit(), content != '')) :
+    #         i += 1
+    #         # print(title)
+    #         # print(content)
+    #         content = ''
+    #         continue
+    #     if arrList[i-1][2:4].isdigit():     # TODO 运行一遍，就会发现问题，在文本最后方加 字符串 3.99 就正常了，请解决一下√
+    #         title = arrList[i]
+    #     else:
+    #         content += arrList[i]
+    #
+    #     i += 1
 
 inputs.close()
 
-
-
-# SQL 插入语句
-# sqlTreatmentProject = """INSERT INTO treatment_project(parent_id,
-#          title, title_unit, order_num, create_time, create_user)
-#          VALUES ('%s', '%s', '%s', '%d', now(), '%d')""" % (parentId, title, nameUnitI, orderNum, createUser)
-#
-# sqlTreatmentContent = """INSERT INTO treatment_content(parent_id,
-#          content, order_num, create_time, create_user)
-#          VALUES ('%s', '%s', '%d', now(), '%d')""" % (nameUnitII, content, orderNumContent, createUser)
-
-
 try:
    # 执行sql语句
-   # cursor.execute(sqlTreatmentProject)
+   cursor.execute(sqlTreatmentProject)
    # cursor.execute(sqlTreatmentContent)
    # print(sql)
    # 提交到数据库执行
