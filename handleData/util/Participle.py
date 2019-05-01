@@ -5,12 +5,12 @@
 # @Function:本页面，按方法来实现较为完整的完成分词、使用停用词、学习专有名词的功能
 import jieba
 import jieba.analyse
+import re
 
 # --------------------------------步骤一  学习专有名词------------------------------------------
 # 用来帮助 jieba 更好的进行名词等词语的分词
 loadDictFileName = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\rules\\suggestFreqTCM.txt"    # 自定义词典的路径
 jieba.load_userdict(loadDictFileName)      # 根据 file_name 路径进行自我学习，更好的进行分词
-
 
 # --------------------------------步骤二  过滤停用词------------------------------------------
 # 创建停用词，用来删除文本中的停用词
@@ -35,21 +35,21 @@ def combinedfile(filepath):
     return combine_dict
 
 # 按照读取到的一行文本进行分割
-def split_words(line):
-    line_combine = line.split("/")
-    return line_combine
+# def split_words(line):
+#     line_combine = line.split("/")
+#     return line_combine
 
 # 进行同义词替换
 def synonym_word(word_to_check):
     final_sentence = ""
-    line_combine = split_words(word_to_check)
+    line_combine = re.split('/',word_to_check)
     for word in line_combine:   # line_combine 一个数组，用来存放分割后的字符串
         combine_dict = combinedfile(fileName)   # 获取同义词文本
         if word in combine_dict:
             word = combine_dict[word]
-            final_sentence += word    # 给替换词的后面加 “/”
+            final_sentence += word + '/'    # 给替换词的后面加 “/”
         else:
-            final_sentence += word    # 按照原来的风格，展示分词的效果
+            final_sentence += word + '/'    # 按照原来的风格，展示分词的效果
 
     return final_sentence
 # ---------------------------------步骤三  以上模块 同义词替换-----------------------------------------
