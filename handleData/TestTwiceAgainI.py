@@ -3,11 +3,7 @@
 # @Date    : 2019-04-16 16:09:41
 # @Author  : 沈力
 # @Version : v1.0
-# 功能：将文本读取，并进行判断是否是数字
-# 1.是数字 - 是哪种数字
-# 2.在数字后的第一个，是专有名词，直接进行数据库存储
-# 3.剩下的字符串全部相加，变成一个字符串，直到遇到数字
-#
+# 功能：进行治则数据库的储存（两张表）
 # treatment_project
 # parentIdI  title   titleUnit  orderNum   createTime    createUser     remark
 #
@@ -72,6 +68,11 @@ for line in inputs:
         titleUnit = 'DE05.01.901.' + count_name(countI-1) + '.' + count_name(countII)
         countII += 1
         title = arrList[2]
+
+        i = 3
+        while i < length:
+            content += arrList[i]
+            i += 1
     else:
         # print('小法')
         parentIdI = 0
@@ -80,63 +81,39 @@ for line in inputs:
         countII = 1     # 将小小法的计数归 1
         title = arrList[1]
 
-    # print(parentIdI)
-    # print(title)
-    # print(titleUnit)
+
+        i = 2
+        while i < length:
+            content += arrList[i]
+            i += 1
+
+    parentIdII = titleUnit      # parentIdII 的值和表 treatproject 的 titleUnit 字段对应
+    contentNoNext = re.split('\n', content)     # 去除每一行的换行符
+
     orderNum += 1   # 排序值自增
     # SQL 插入语句
     sqlTreatmentProject = """INSERT INTO treatproject(parent_id,
              title, title_unit, order_num, create_time, create_user)
              VALUES ('%s', '%s', '%s', '%d', now(), '%d')""" % (parentIdI, title, titleUnit, orderNum, createUser)
-    #
-    # sqlTreatmentContent = """INSERT INTO treatment_content(parent_id,
-    #          content, order_num, create_time, create_user)
-    #          VALUES ('%s', '%s', '%d', now(), '%d')""" % (nameUnitII, content, orderNumContent, createUser)
+
+    sqlTreatmentContent = """INSERT INTO treatcontent(parent_id,
+             content, order_num, create_time, create_user)
+             VALUES ('%s', '%s', '%d', now(), '%d')""" % (parentIdII, contentNoNext[0], orderNum, createUser)
+
+    content = ''        # 将 content 内容置空，以便存放吓一跳数据
 
     try:
         # 执行sql语句
         cursor.execute(sqlTreatmentProject)
-        # cursor.execute(sqlTreatmentContent)
-        # print(sql)
+        cursor.execute(sqlTreatmentContent)
         # 提交到数据库执行
         db.commit()
-        # print("com")
     except:
         # Rollback in case there is any error
         db.rollback()
         print("error")
 
-    # i = 0
-    # while i < length:
-    #     num = arrList[i][2:4]  # 取每个数组的第[2:4]的字符，是否是数字
-    #
-    #     if all((num.isdigit(), content != '')) :
-    #         i += 1
-    #         # print(title)
-    #         # print(content)
-    #         content = ''
-    #         continue
-    #     if arrList[i-1][2:4].isdigit():     # TODO 运行一遍，就会发现问题，在文本最后方加 字符串 3.99 就正常了，请解决一下√
-    #         title = arrList[i]
-    #     else:
-    #         content += arrList[i]
-    #
-    #     i += 1
-
 inputs.close()
-
-try:
-   # 执行sql语句
-   cursor.execute(sqlTreatmentProject)
-   # cursor.execute(sqlTreatmentContent)
-   # print(sql)
-   # 提交到数据库执行
-   db.commit()
-   # print("com")
-except:
-   # Rollback in case there is any error
-   db.rollback()
-   print("error")
 
 # 关闭数据库连接
 db.close()
