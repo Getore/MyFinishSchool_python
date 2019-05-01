@@ -1,9 +1,8 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Date    : 2019-04-27 11:09:41
-# @Author  : 沈力
+# @Date    : 2019/4/27 - 10:15
+# @Author  : shenli
 # @Version : v1.0
-# 功能：本页面主要用来将PDF转换得到的TXT文本，分为 治则和治法 两个部分文本
+# @Function:本页面主要用来将PDF转换得到的TXT文本，分为 治则和治法 两个部分文本
 import re
 
 def split_file():
