@@ -1,7 +1,5 @@
 # 进行去除停用词、专有名词分词
-from Participle import seg_sentence
 # 进行同义词替换（比较耗时）
-from Participle import synonym_word
 # 进行治则治法文件的分隔
 from SplitFile import split_file
 
