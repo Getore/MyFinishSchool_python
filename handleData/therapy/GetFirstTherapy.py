@@ -4,7 +4,7 @@
 # @Version : v1.0
 # @Function: 用来将治法文本处理成可分词的格式
 import re
-from CheckFa import check_fa
+from Utils import check_fa
 
 # 文件的读取地址
 prepareFile_todo = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\words_out\\Therapy.txt"
