@@ -4,9 +4,9 @@
 # @Version : v1.0
 # @Function: 将数据插入 - theraproject表中
 import re
+import MySQLdb
 from Utils import check_first_char
 from Utils import del_words
-import MySQLdb
 from Utils import count_name
 
 def theraproject_insert():

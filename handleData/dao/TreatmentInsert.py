@@ -11,9 +11,9 @@
 # parentIdII  content            orderNum   createTime  createUser   remark
 import MySQLdb
 import re
+from Utils import count_name
 from handleData.treatment.SegTreatment import seg_treatment
 from handleData.treatment.SQLPrepareTreatment import prepare_treatment
-from Utils import count_name
 
 def treatment_insert():
     prepare_treatment()  # 将治则文本进行规范，变成一行一行的规范
