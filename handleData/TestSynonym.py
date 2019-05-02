@@ -4,7 +4,7 @@ import jieba
 
 
 # 读取同义词的词典
-fileName = "F:\\BigStudyGraduation\\MyFinishSchool\\pythonFile\\synonymTCM.txt"
+fileName = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\rules\\synonymTCM.txt"
 def combinedfile(filepath):
     combine_dict = {}
     for line in open(filepath, "r", encoding="utf-8"):
@@ -26,7 +26,7 @@ result.close()
 # 按照读取到的文本进行分割，依据 “/”分隔，为了去除同义词
 def split_file():
     for line in open(
-            "F:\\Trainee\\ideaIU-2018.2\\TraditionalChineseMedicine_PDF_Check\\src\\txt\\testResultSynonym.txt", "r",
+            "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\words_outII\\testResultSynonym.txt", "r",
             encoding="utf-8"):
         line_combine = line.split("/")
 
