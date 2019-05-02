@@ -13,6 +13,7 @@ import MySQLdb
 import re
 from handleData.treatment.SegTreatment import seg_treatment
 from handleData.treatment.SQLPrepareTreatment import prepare_treatment
+from Utils import count_name
 
 def treatment_insert():
     prepare_treatment()  # 将治则文本进行规范，变成一行一行的规范
@@ -38,15 +39,6 @@ def treatment_insert():
     createTime = 'now()'
     createUser = 1
     remark = ''
-
-    # 用来判断当前的 cou 是否是一位，一位则输出‘01’的形式，两位则无需加‘0’的前缀
-    def count_name(cou):
-        cou = str(cou)
-        lengthCou = len(cou)
-        if lengthCou == 1:
-            cou = '0' + cou
-
-        return cou
 
     # 文件的读取地址
     readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\words_outII\\Treatment.txt"
