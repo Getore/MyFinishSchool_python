@@ -2,7 +2,7 @@
 # @Time    : 2019/5/1 - 10:15
 # @Author  : shenli
 # @Version : v1.0
-# @Function: 用来将治则文本处理成准数据库的格式
+# @Function: 用来将治则文本处理成可分词的格式
 import re
 
 def prepare_treatment():

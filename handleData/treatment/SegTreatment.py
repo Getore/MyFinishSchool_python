@@ -4,7 +4,7 @@
 # @Author  : 沈力
 # @Version : v1.0
 
-# 功能：本页面，进行预处理成数据库的格式：.../.../.../...的形式
+# 功能：本页面，进行治则预处理，变成格式：.../.../.../...的形式
 from Participle import seg_sentence
 # 进行同义词替换（比较耗时）
 from Participle import synonym_word

@@ -11,15 +11,15 @@
 # parentIdII  content            orderNum   createTime  createUser   remark
 import MySQLdb
 import re
-from SegTreatment import seg_treatment
-from SQLPrepareTreatment import prepare_treatment
+from handleData.treatment.SegTreatment import seg_treatment
+from handleData.treatment.SQLPrepareTreatment import prepare_treatment
 
 def treatment_insert():
     prepare_treatment()  # 将治则文本进行规范，变成一行一行的规范
     seg_treatment()  # 预处理治则文本，准备接下来的数据库存储
 
     # 连接数据库         连接地址        账号      密码             数据库             数据库编码
-    db = MySQLdb.connect("localhost", "root", "123456", "tcm_clinicaltttpart", charset="utf8")
+    db = MySQLdb.connect("localhost", "root", "123456", "tcm_clinicaltttpart_pure", charset="utf8")
 
     # 使用cursor()方法获取操作游标
     cursor = db.cursor()
