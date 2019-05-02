@@ -7,11 +7,15 @@
 # lines = '表里双解法'
 # print(check_fa(lines, 5))
 
-def check_fa(line, num):
+def check_fa(line, num):    # num 的意思是表示超过的值，可以减少判断，优化部分
+    length = len(line)
     arrList = list(line)
 
+    if length > num:
+        return 0
+
     i = 0
-    while i < num:
+    while i < length:
         if arrList[i] == '法':
             return 1
         i += 1
