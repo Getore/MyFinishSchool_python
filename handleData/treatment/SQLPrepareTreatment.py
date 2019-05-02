@@ -24,7 +24,7 @@ def prepare_treatment():
 
         if arrLine[0][0:1].isdigit():
             result = arrLine[0]
-        if not arrLine[0][0:1].isdigit():
+        else:
             result += arrLine[0]
 
     outputs.close()
