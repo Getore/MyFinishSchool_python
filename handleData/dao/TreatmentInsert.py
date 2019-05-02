@@ -95,7 +95,7 @@ def treatment_insert():
                  content, order_num, create_time, create_user)
                  VALUES ('%s', '%s', '%d', now(), '%d')""" % (parentIdII, contentNoNext[0], orderNum, createUser)
 
-        content = ''  # 将 content 内容置空，以便存放吓一跳数据
+        content = ''  # 将 content 内容置空，以便存放下一条数据
 
         try:
             # 执行sql语句
