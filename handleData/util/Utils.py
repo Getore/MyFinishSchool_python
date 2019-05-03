@@ -41,7 +41,7 @@ def del_num(line):
 
 # 去除字符串中的数字、字母以及 ! % [ ] , 。 ‘ ‘这些特殊符号
 def del_words(line):
-    result = re.sub("[A-Za-z0-9\!\%\[\]\,\。\‘\‘]", "", line)
+    result = re.sub("[A-Za-z0-9\!\%\[\]\,\。\‘\‘\.]", "", line)
     return result
 
 # 判断此行字符串是否有数字、字母、/ . - — 特殊字符
@@ -58,6 +58,31 @@ def is_num_word(line):
 
     return 1
 
+# 判断前8个字符串中有几个点 . 用来判断名称
+# 0 没有点   是大法/也有可能是内容   在治则中，没有点就是内容；在治法中，没有点可能两者意思
+# 1 一个点   是一级小法/一级小治
+# 2 两个点   是二级小法/二级小治
+#
+# 最大值 “99.99.99” 最大 8 个字符
+def point_num(line):
+    count = 0   # 用来存储.的个数
+    max = 0     # 用来存储行字符的最大值
+    arrList = list(line)
+    length = len(arrList)
+    i = 0
+
+    if length < 8:
+        max = length
+    else:
+        max = 8
+
+    while i < max:
+        if arrList[i] == '.':
+            count += 1
+        i += 1
+
+    return count
+
 # 用来判断当前的 cou 是否是一位，一位则输出‘01’的形式，两位则无需加‘0’的前缀
 def count_name(cou):
     cou = str(cou)
@@ -67,5 +92,5 @@ def count_name(cou):
 
     return cou
 
-# lines = '/T16751.3-1997\n'
-# print(is_num_word(lines))
+# lines = '31.04寓补于攻32423423423423443234'
+# print(point_num(lines))

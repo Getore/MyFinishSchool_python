@@ -40,8 +40,8 @@ def split_file():
         elif all((flag == 1, mark == 1)):
             therapyOutput.write(re.sub('\n+', '\n', line))
 
-    treatmentOutput.write('3')  # 此处是为了，下一步转换成数据库的预备文件处理作出格式数字添加，只要是数字就行
-    therapyOutput.write('32')
+    # treatmentOutput.write('3')  # 此处是为了，下一步转换成数据库的预备文件处理作出格式数字添加，只要是数字就行
+    # therapyOutput.write('32')
 
     treatmentOutput.close()
     therapyOutput.close()

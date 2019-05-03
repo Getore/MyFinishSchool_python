@@ -12,13 +12,15 @@ prepareFile_todo = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\wo
 
 inputs = open(prepareFile_todo, 'r', encoding='utf-8')  # 设置文本格式
 
+count = 1
 for line in inputs:  # line 变量，才是从读取文件的每一行的原始数据
     result = line
 
     if check_first_char(line, '0') == 1:    # 根据第一位字符是否是‘0’来判断是否是大法
         arrList = re.split('\n', line)      # 去除换行符
         result = del_words(arrList[0])
-        print(result)
+        print(str(count) + result)
+        count += 1
         # result = ''     # 看是否有必要去掉大法的名称，也就是主要看后期处理的方式
 
 inputs.close()

@@ -4,11 +4,8 @@
 # @Version : v1.0
 # @Function: 用来将治则文本处理成可分词的格式
 import re
-from SplitFile import split_file
 
 def prepare_treatment():
-    split_file()
-
     # 文件的读取地址
     prepareFile_todo = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\words_out\\Treatment.txt"
     # 文件的写地址
@@ -25,14 +22,10 @@ def prepare_treatment():
         if any((line == '国家技术监督局1997-03-04批准\n', line == '1997-10-01实施\n')):
             continue
 
-        if arrLine[0][0:1].isdigit():  # 顺序问题，这个需要放在前面
-            outputs.write(result + '\n')
-
         if arrLine[0][0:1].isdigit():
-            result = arrLine[0]
+            outputs.write('\n' + line)
         else:
-            result += arrLine[0]
+            outputs.write(arrLine[0])
 
     outputs.close()
     inputs.close()
-
