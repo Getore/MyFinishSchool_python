@@ -44,6 +44,19 @@ def del_words(line):
     result = re.sub("[A-Za-z0-9\!\%\[\]\,\。\‘\‘]", "", line)
     return result
 
+# 判断此行字符串是否有数字、字母、/ . - — 特殊字符
+def is_num_word(line):
+    value = re.compile("[A-Za-z0-9\/\.\-\—]+")
+    arrList = list(line)
+    length = len(arrList)
+    i = 0
+    while i < length:
+        result = value.match(arrList[i])
+        if not result:
+            return 0
+        i += 1
+
+    return 1
 
 # 用来判断当前的 cou 是否是一位，一位则输出‘01’的形式，两位则无需加‘0’的前缀
 def count_name(cou):
@@ -53,7 +66,6 @@ def count_name(cou):
         cou = '0' + cou
 
     return cou
-# lines = 'd治五官法'
-# print(del_words(lines))
 
-
+# lines = '/T16751.3-1997'
+# print(is_num_word(lines))
