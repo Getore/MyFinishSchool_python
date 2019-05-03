@@ -46,12 +46,12 @@ def del_words(line):
 
 # 判断此行字符串是否有数字、字母、/ . - — 特殊字符
 def is_num_word(line):
-    value = re.compile("[A-Za-z0-9\/\.\-\—]+")
+    value = re.compile("[A-Za-z0-9\/\.\-\—\n]+")
     arrList = list(line)
     length = len(arrList)
     i = 0
     while i < length:
-        result = value.match(arrList[i])
+        result = value.match(arrList[i])    # 匹配 value 中的字符
         if not result:
             return 0
         i += 1
@@ -67,5 +67,5 @@ def count_name(cou):
 
     return cou
 
-# lines = '/T16751.3-1997'
+# lines = '/T16751.3-1997\n'
 # print(is_num_word(lines))
