@@ -72,10 +72,6 @@ def treatment_insert():
         parentIdII = titleUnit  # parentIdII 的值和表 treatproject 的 titleUnit 字段对应
 
         if not content == '':
-            # print(parentIdI)
-            # print(titleUnit)
-            # print(title)
-
             orderNum += 1  # 排序值自增
             # SQL 插入语句
             sqlTreatmentProject = """INSERT INTO treatproject(parent_id,
@@ -83,17 +79,17 @@ def treatment_insert():
                              VALUES ('%s', '%s', '%s', '%d', now(), '%d')""" % (
                 parentIdI, title, titleUnit, orderNum, createUser)
 
-            # sqlTreatmentContent = """INSERT INTO treatcontent(parent_id,
-            #                  content, order_num, create_time, create_user)
-            #                  VALUES ('%s', '%s', '%d', now(), '%d')""" % (
-            # parentIdII, , orderNum, createUser)
+            sqlTreatmentContent = """INSERT INTO treatcontent(parent_id,
+                             content, order_num, create_time, create_user)
+                             VALUES ('%s', '%s', '%d', now(), '%d')""" % (
+            parentIdII, content, orderNum, createUser)
 
-            content = ''  # 将 content 内容置空，以便存放下一条数据
+            content = ''  # 将 content 内容置空，以便存放下一条数据，也便于下一次判断
 
             try:
                 # 执行sql语句
                 cursor.execute(sqlTreatmentProject)
-                # cursor.execute(sqlTreatmentContent)
+                cursor.execute(sqlTreatmentContent)
                 # 提交到数据库执行
                 db.commit()
             except:
