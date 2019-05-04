@@ -58,7 +58,7 @@ def is_num_word(line):
 
     return 1
 
-# 判断前8个字符串中有几个点 . 用来判断名称
+# 判断前8个字符串中有几个点 . 或者,用来判断名称
 # 0 没有点   是大法/也有可能是内容   在治则中，没有点就是内容；在治法中，没有点可能两者意思
 # 1 一个点   是一级小法/一级小治
 # 2 两个点   是二级小法/二级小治
@@ -77,7 +77,7 @@ def point_num(line):
         max = 8
 
     while i < max:
-        if arrList[i] == '.':
+        if any((arrList[i] == '.', arrList[i] == ',')):
             count += 1
         i += 1
 
@@ -92,5 +92,5 @@ def count_name(cou):
 
     return cou
 
-# lines = '31.04寓补于攻32423423423423443234'
+# lines = '23.5,2补[固]肾摄精'
 # print(point_num(lines))
