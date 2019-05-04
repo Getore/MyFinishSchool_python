@@ -21,13 +21,18 @@ cursor = db.cursor()
 countI = 2      # 用来作为 大法 的计数
 countII = 1     # 用来作为 小法 的计数
 countIII = 1    # 用来作为 小小法 的计数
-parentId = 0  # 默认值为 0
+parentIdI = 0  # 默认值为 0
 nametp = '解表法'
 nametpUnit = 'DE05.01.902'  # DE05.01.902   解表法
 orderNum = 1
 createTime = 'now()'
 createUser = 1
 remark = ''
+
+parentIdII = 0  # 治法内容的父节点
+applicableSymptom = ''  # 适用症候，适用于
+specificTreatment = ''  # 具体的治疗方法
+synonymWord = ''        # 与治法相同的同义词语
 
 # 文件的读取地址
 prepareFile_todo = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\words_outI\\Therapy.txt"
@@ -57,49 +62,45 @@ for line in inputs:  # line 变量，才是从读取文件的每一行的原始�
         pointNum = 2
 
     if line[0:1].isdigit():
+        orderNum += 1
+
         if pointNum == 0:  # 大法系列
-            parentId = 0
+            parentIdI = 0
             nametp = del_words(line)
             nametpUnit = 'DE05.01.9' + count_name(countI)
             countI += 1
             countII = 1
             countIII = 1
+
+            sqlTheraproject = """INSERT INTO theraproject(parent_id,
+                                 nametp, nametp_unit, order_num, create_time, create_user)
+                                 VALUES ('%s', '%s', '%s', '%d', now(), '%d')""" % (
+                parentIdI, nametp, nametpUnit, orderNum, createUser)
         elif pointNum == 1:  # 小法系列
-            parentId = 'DE05.01.9' + count_name(countI-1)
+            parentIdI = 'DE05.01.9' + count_name(countI - 1)
             nametp = del_words(line)
             nametpUnit = 'DE05.01.9' + count_name(countI-1) + '.' + count_name(countII)
             countII += 1
             countIII = 1
+
+            sqlTheraproject = """INSERT INTO theraproject(parent_id,
+                                             nametp, nametp_unit, order_num, create_time, create_user)
+                                             VALUES ('%s', '%s', '%s', '%d', now(), '%d')""" % (
+                parentIdI, nametp, nametpUnit, orderNum, createUser)
         elif pointNum == 2:  # 小小法系列
-            parentId = 'DE05.01.9' + count_name(countI-1) + '.' + count_name(countII-1)
+            parentIdI = 'DE05.01.9' + count_name(countI - 1) + '.' + count_name(countII - 1)
             nametp = del_words(line)
             nametpUnit = 'DE05.01.9' + count_name(countI-1) + '.' + count_name(countII-1) + '.' + count_name(countIII)
             countIII += 1
-            print(parentId)
-            print(nametp)
-            print(nametpUnit)
 
-        # line = del_words(line)
-        # print(line)
-
-    # if check_first_char(line, '0') == 1:  # 根据第一位字符是否是‘0’来判断是否是大法
-    #     arrList = re.split('\n', line)  # 去除换行符
-    #     nametp = del_words(arrList[0])  # 大法的名称
-    #
-    #     # nametpUnit的编码搭配
-    #     nametpUnit = 'DE05.01.9' + count_name(count) + '.00'
-    #     count += 1
-
-        orderNum += 1  # 排序值自加
-        # SQL 插入语句
-        sqlTheraproject = """INSERT INTO theraproject(parent_id,
-                     nametp, nametp_unit, order_num, create_time, create_user)
-                     VALUES ('%s', '%s', '%s', '%d', now(), '%d')""" % (
-            parentId, nametp, nametpUnit, orderNum, createUser)
+            sqlTheraproject = """INSERT INTO theraproject_detailtcm(parent_id,
+                                             nametpd, nametpd_unit, order_num, create_time, create_user)
+                                             VALUES ('%s', '%s', '%s', '%d', now(), '%d')""" % (
+                parentIdI, nametp, nametpUnit, orderNum, createUser)
 
         try:
             # 执行sql语句
-            # cursor.execute(sqlTheraproject)
+            cursor.execute(sqlTheraproject)
             # 提交到数据库执行
             db.commit()
         except:
