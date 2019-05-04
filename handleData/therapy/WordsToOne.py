@@ -25,9 +25,6 @@ for line in inputs:  # line 变量，才是从读取文件的每一行的原始�
 
     arrLine = re.split('\n', line)
 
-    # if arrLine[0][0:1].isdigit(): # 输出治法名词部分
-    #     outputs.write(line)
-
     if arrLine[0][0:1].isdigit():
         outputs.write('\n' + line)
     else:
