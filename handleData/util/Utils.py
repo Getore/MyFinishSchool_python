@@ -9,7 +9,7 @@
 import re
 from string import digits
 
-# num 的意思是表示超过的值，可以减少判断，优化部分
+# check_fa，查找前 num 中是否有‘法’。num的意思是表示超过的值，可以减少判断，优化部分
 def check_fa(line, num):
     length = len(line)
     arrList = list(line)
