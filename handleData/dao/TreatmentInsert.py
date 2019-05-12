@@ -20,7 +20,7 @@ def treatment_insert():
     prepare_treatment()  # 完成治则文本的内容合并
     # seg_treatment()  # 预处理治则文本，准备接下来的数据库存储
     # 连接数据库         连接地址        账号      密码             数据库             数据库编码
-    db = MySQLdb.connect("localhost", "root", "123456", "tcm_clinicaltttpart_pure", charset="utf8")
+    db = MySQLdb.connect("localhost", "root", "123456", "tcm_clinicaltttpart", charset="utf8")
 
     # 使用cursor()方法获取操作游标
     cursor = db.cursor()
@@ -55,10 +55,10 @@ def treatment_insert():
 
         orderNum += 1  # 排序值自增
         if line[0:1].isdigit():
-            if any((point_num(line) == 1, line[0:2] == '39')):  # line[0:2] == '39'是一个特殊的小治则
-                # 小治则
+            # point_num(line) == 1 则为治则二级名称
+            if any((point_num(line) == 1, line[0:2] == '39')):  # 针对line[0:2] == '39'进行特殊处理
                 parentIdI = 0
-                titleUnit = 'DE05.01.901.' + count_name(countI)
+                titleUnit = 'DE05.01.901.' + count_name(countI) # 治则二级名称
                 countI += 1
                 countII = 1
                 title = del_words(line)
@@ -67,8 +67,7 @@ def treatment_insert():
                                          title, title_unit, order_num, create_time, create_user)
                                          VALUES ('%s', '%s', '%s', '%d', now(), '%d')""" % (
                     parentIdI, title, titleUnit, orderNum, createUser)
-            elif point_num(line) == 2:
-                # 小小治则
+            elif point_num(line) == 2:  # 治则三级名称
                 parentIdI = 'DE05.01.901.' + count_name(countI - 1)
                 titleUnit = 'DE05.01.901.' + count_name(countI - 1) + '.' + count_name(countII)
                 countII += 1

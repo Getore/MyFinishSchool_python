@@ -15,7 +15,7 @@ jieba.load_userdict(loadDictFileName)      # 根据 file_name 路径进行自我
 # --------------------------------步骤二  过滤停用词------------------------------------------
 # 创建停用词，用来删除文本中的停用词
 setStopWordsFileName = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\rules\\stopWordsTCM.txt"   # 停用词路径 - setStopWordsFileName
-# stopwordslist 此方法，用来读取停用词
+# stopwordslist 读取停用词
 def stopwordslist(filepath):
     stopwords = [line.strip() for line in open(filepath, 'r', encoding='utf-8').readlines()]
     return stopwords
@@ -58,12 +58,12 @@ def synonym_word(word_to_check):
 # ---------------------------分词-----------------------------------------------
 # seg_sentence 此方法，用来对句子进行分词
 def seg_sentence(sentence):
+    outstr = ''
     sentence_seged = jieba.cut(sentence.strip())
     stopwords = stopwordslist(setStopWordsFileName)  # 这里加载停用词的路径
-    outstr = ''
-    for word in sentence_seged:
-        if word not in stopwords:
+    for word in sentence_seged:     # 对分词的词语进行查找
+        if word not in stopwords:   # 如果不在停用词中，则存入临时变量outstr中
             if word != '\t':
                 outstr += word
-                outstr += "/"
+                outstr += "/"       # 保持原分词效果
     return outstr
