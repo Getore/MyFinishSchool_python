@@ -43,7 +43,7 @@ def stop_words_insert():
         except:
             # Rollback in case there is any error
             db.rollback()
-            print('error')
+            # print('error')
 
     # 关闭数据库连接
     db.close()
