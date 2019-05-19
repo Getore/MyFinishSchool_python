@@ -10,6 +10,7 @@
 # treatment_content
 # parentIdII  content            orderNum   createTime  createUser   remark
 import MySQLdb
+from SegTreatment import seg_treatment
 import re
 from Utils import count_name
 from Utils import point_num
@@ -17,8 +18,7 @@ from Utils import del_words
 from SQLPrepareTreatment import prepare_treatment
 
 def treatment_insert():
-    prepare_treatment()  # 完成治则文本的内容合并
-    # seg_treatment()  # 预处理治则文本，准备接下来的数据库存储
+    seg_treatment()  # 预处理治则文本，准备接下来的数据库存储
     # 连接数据库         连接地址        账号      密码             数据库             数据库编码
     db = MySQLdb.connect("localhost", "root", "123456", "tcm_clinicaltttpart", charset="utf8")
 
@@ -47,8 +47,7 @@ def treatment_insert():
     # oldNum = 0  # 用来存上一个标识
     # newNum = 0  # 用来存现在的这个标识
 
-    inputs = open(readFileName, 'r',
-                  encoding='utf-8-sig')  # UTF-8以字节为编码单元，它的字节顺序在所有系统中都是一様的，没有字节序的问题，也因此它实际上并不需要BOM(“ByteOrder Mark”)。但是UTF-8 with BOM即utf-8-sig需要提供BOM。
+    inputs = open(readFileName, 'r', encoding='utf-8-sig')  # UTF-8以字节为编码单元，它的字节顺序在所有系统中都是一様的，没有字节序的问题，也因此它实际上并不需要BOM(“ByteOrder Mark”)。但是UTF-8 with BOM即utf-8-sig需要提供BOM。
     for line in inputs:
         if line == '\n':  # 清除没有内容的一行，如第一行
             continue

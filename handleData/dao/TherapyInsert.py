@@ -11,9 +11,10 @@ from Utils import count_name
 from Utils import point_num
 from SQLPrepareTheraproject import prepare_theraproject
 from WordSegmentation import delete_stop_words
+from SegTherapy import seg_therapy
 
 def therapy_insert():
-    prepare_theraproject()  # 将治法文件连续的文本变成一行
+    seg_therapy()   # 预处理治法文本，准备接下来的数据库存储
     # 连接数据库         连接地址        账号      密码             数据库             数据库编码
     db = MySQLdb.connect("localhost", "root", "123456", "tcm_clinicaltttpart", charset="utf8")
 
@@ -38,7 +39,7 @@ def therapy_insert():
     synonymWord = ''  # 与治法相同的同义词语
 
     # 文件的读取地址
-    prepareFile_todo = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\words_outI\\Therapy.txt"
+    prepareFile_todo = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\words_outII\\Therapy.txt"
 
     inputs = open(prepareFile_todo, 'r', encoding='utf-8')  # 设置文本格式
 
