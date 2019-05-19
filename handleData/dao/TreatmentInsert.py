@@ -41,7 +41,7 @@ def treatment_insert():
     remark = ''
 
     # 文件的读取地址
-    readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\words_outI\\Treatment.txt"
+    readFileName = "F:\\Trainee\\pycharm-professional\\workspace\\handleData\\words_outII\\Treatment.txt"
 
     # num = '0'
     # oldNum = 0  # 用来存上一个标识

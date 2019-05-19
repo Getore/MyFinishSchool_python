@@ -20,7 +20,11 @@ def seg_treatment():
 
     for line in inputs:  # line 变量，才是从读取文件的每一行的原始数据
         line_seg = seg_sentence(line)  # 进行去除停用词、专有名词分词，line_seg 结果是经过 seg_sentence() 方法处理的分词结果，即.../.../..，这样的结果
-        # line_seg = synonym_word(line)  #TODO 待改进 进行同义词替换（比较耗时）
-        outputs.write(line_seg + '\n')
+        line_syn = synonym_word(line_seg)  #TODO 待改进 进行同义词替换（比较耗时）
+        outputs.write(line_syn + '\n')
+        # print(line_syn)
     outputs.close()
     inputs.close()
+
+
+seg_treatment()
