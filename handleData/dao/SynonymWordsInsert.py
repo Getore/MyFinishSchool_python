@@ -39,7 +39,7 @@ def synonym_words_insert():
             i += 1
 
         # SQL 插入语句
-        sql = """INSERT INTO synonym_words(namesy,typesy, describesy, synonymsy, create_time, create_user)
+        sql = """INSERT INTO synonymwords(namesy,typesy, describesy, synonymsy, create_time, create_user)
                  VALUES ('%s', '%s', '%s', '%s', now(), '%d')""" % (words[0], typeSY, describeSY, synonymSY, createUser)
 
         try:

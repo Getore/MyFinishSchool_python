@@ -31,7 +31,7 @@ def suggest_words_insert():
         line = re.split('\n', line)
 
         # SQL 插入语句
-        sql = """INSERT INTO suggest_words(namesg,typesg, describesg, create_time, create_user)
+        sql = """INSERT INTO suggestwords(namesg,typesg, describesg, create_time, create_user)
                  VALUES ('%s', '%s', '%s', now(), '%d')""" % (line[0], typeSG, describeSG, createUser)
 
         try:

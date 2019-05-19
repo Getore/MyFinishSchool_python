@@ -31,7 +31,7 @@ def stop_words_insert():
         line = re.split('\n', line)
 
         # SQL 插入语句
-        sql = """INSERT INTO stop_words(namest,typest, describest, create_time, create_user)
+        sql = """INSERT INTO stopwords(namest,typest, describest, create_time, create_user)
                  VALUES ('%s', '%s', '%s', now(), '%d')""" % (line[0], typeST, describeST, createUser)
 
         try:
@@ -43,7 +43,7 @@ def stop_words_insert():
         except:
             # Rollback in case there is any error
             db.rollback()
-            # print('error')
+            print('error')
 
     # 关闭数据库连接
     db.close()
