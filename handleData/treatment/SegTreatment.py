@@ -3,7 +3,6 @@
 # @Date    : 2019-04-27 16:09:41
 # @Author  : 沈力
 # @Version : v1.0
-
 # 功能：本页面，进行治则预处理，变成格式：.../.../.../...的形式
 from SQLPrepareTreatment import prepare_treatment
 from Participle import seg_sentence
@@ -27,7 +26,7 @@ def seg_treatment():
             continue
         else:
             line_seg = seg_sentence(line)  # 进行去除停用词、专有名词分词，line_seg 结果是经过 seg_sentence() 方法处理的分词结果，即.../.../..，这样的结果
-            line_syn = synonym_word(line_seg)  # TODO 待改进 进行同义词替换（比较耗时）
+            line_syn = synonym_word(line_seg)
             outputs.write(line_syn + '\n')
 
     outputs.close()
