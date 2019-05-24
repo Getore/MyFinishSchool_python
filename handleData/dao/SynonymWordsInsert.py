@@ -35,7 +35,11 @@ def synonym_words_insert():
         # print(length)
         i = 1
         while i < length:
-            synonymSY += '|' + words[i]
+            if i == 1:
+                synonymSY += words[i]       # 如果是第一个同义词，那么其左侧不用显示'|'
+            else:
+                synonymSY += '|' + words[i] # 如果不是第一个同义词，那么其左侧显示'|'
+
             i += 1
 
         # SQL 插入语句
