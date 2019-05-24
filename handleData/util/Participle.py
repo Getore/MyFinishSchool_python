@@ -66,4 +66,6 @@ def seg_sentence(sentence):
             if word != '\t':
                 outstr += word
                 outstr += "/"       # 保持原分词效果
+
+    print(outstr)   # 用于在此软件后台显示分词的运行效果，方便观察
     return outstr
