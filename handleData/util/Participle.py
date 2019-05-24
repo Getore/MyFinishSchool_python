@@ -51,6 +51,7 @@ def synonym_word(word_to_check):
         else:
             final_sentence += word    # 按照原来的风格，展示分词的效果
 
+    print('同义词替换后的效果：' + final_sentence)   # 打印同义词替换后的效果
     return final_sentence
 # ---------------------------------步骤三  以上模块 同义词替换-----------------------------------------
 
@@ -67,5 +68,5 @@ def seg_sentence(sentence):
                 outstr += word
                 outstr += "/"       # 保持原分词效果
 
-    print(outstr)   # 用于在此软件后台显示分词的运行效果，方便观察
+    print('预处理分词后的效果：' + outstr)   # 用于在此软件后台显示分词的运行效果，方便观察
     return outstr
