@@ -80,6 +80,7 @@ def treatment_insert():
             try:
                 # 执行sql语句
                 cursor.execute(sqlTreatmentProject)
+                print(sqlTreatmentProject)
                 # 提交到数据库执行
                 db.commit()
             except:
@@ -98,6 +99,7 @@ def treatment_insert():
             try:
                 # 执行sql语句
                 cursor.execute(sqlTreatmentContent)
+                print(sqlTreatmentContent)
                 # 提交到数据库执行
                 db.commit()
             except:

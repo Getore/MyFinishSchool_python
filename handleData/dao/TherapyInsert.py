@@ -106,6 +106,7 @@ def therapy_insert():
             try:
                 # 执行sql语句
                 cursor.execute(sqlTheraproject)
+                print('正在向数据库插入治则名称：' + sqlTheraproject)
                 # 提交到数据库执行
                 db.commit()
             except:
@@ -150,6 +151,7 @@ def therapy_insert():
             try:
                 # 执行sql语句
                 cursor.execute(sqlTheracontent)
+                print('正在向数据库插入治则内容：' + sqlTheracontent)
                 # 提交到数据库执行
                 db.commit()
             except:

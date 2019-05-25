@@ -49,6 +49,7 @@ def synonym_words_insert():
         try:
             # 执行sql语句
             cursor.execute(sql)
+            print('正在向数据库插入同义词词库：' + sql)
             # 提交到数据库执行
             db.commit()
             synonymSY = ''  # 清空同义词内容，方便存储下一个同义词

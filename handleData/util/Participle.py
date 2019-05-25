@@ -57,7 +57,7 @@ def synonym_word(word_to_check):
 
 
 # ---------------------------分词-----------------------------------------------
-# seg_sentence 此方法，用来对句子进行分词
+# seg_sentence 此方法，用来对句子进行分词，使用了停用词库
 def seg_sentence(sentence):
     outstr = ''
     sentence_seged = jieba.cut(sentence.strip())

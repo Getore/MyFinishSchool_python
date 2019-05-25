@@ -37,6 +37,7 @@ def suggest_words_insert():
         try:
             # 执行sql语句
             cursor.execute(sql)
+            print('正在向数据库插入专有名词词库：' + sql)
             # 提交到数据库执行
             db.commit()
 

@@ -5,6 +5,7 @@ from StopWordsInsert import stop_words_insert
 from SuggestWordsInsert import suggest_words_insert
 from SynonymWordsInsert import synonym_words_insert
 
+print('------------------------------------开始 中医临床诊疗术语治则治法部分数据的预处理------------------------------------')
 # 分成治则、治法两个文件
 split_file()
 # 启动程序，进行 治则数据库的插入
@@ -19,3 +20,5 @@ stop_words_insert()
 suggest_words_insert()
 # 进行同义词词库数据库的插入
 synonym_words_insert()
+
+print('------------------------------------完成 中医临床诊疗术语治则治法部分数据的预处理------------------------------------')
